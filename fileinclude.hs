@@ -1,3 +1,6 @@
+#!/usr/bin/env runhaskell
+
+{-
 The MIT License (MIT)
 
 Copyright (c) 2015 Wasif Hasan Baig <pr.wasif@gmail.com>
@@ -19,4 +22,31 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+-}
 
+{-|
+  A Pandoc filter that replaces Image Links having *.md extension with the
+  parsed contents of the specified markdown file. In your markdown, include the
+  markdown file as shown below.
+
+  >  ![This section heading will be ignored](section-two.md)
+-}
+
+import Data.List        (isSuffixOf)
+import Text.Pandoc
+import Text.Pandoc.JSON (toJSONFilter)
+
+main :: IO ()
+main = toJSONFilter includeFileContent
+
+includeFileContent :: [String] -> Block -> IO [Block]
+includeFileContent exts (Para [(Image l (f, _))])
+    | or $ map (`isSuffixOf` f) $ "md":exts
+    = do
+        contents <- readFile f
+        return . pandocToBlocks . readMarkdown def $ contents
+includeFileContent _ x = return [x]
+
+-- | Extracts [Block] from Pandoc
+pandocToBlocks :: Pandoc -> [Block]
+pandocToBlocks (Pandoc _ bs) = bs
