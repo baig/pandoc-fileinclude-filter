@@ -16,7 +16,7 @@ This file has been has been post-processed through
 License
 -------
 
-[pandoc-csv2table-filter][filter] 
+[pandoc-fileinclude-filter][filter] 
 
 The MIT License
 

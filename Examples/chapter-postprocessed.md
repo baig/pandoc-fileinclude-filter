@@ -15,7 +15,7 @@ This is the background of this document. It includes a picture of a
 giraffe.
 
 ![A
-Giraffe](http://www.giraffeworlds.com/wp-content/uploads/Beautiful_Masai_Giraffe_Posing_600.jpg)
+Giraffe](http://www.animal-photography.com/thumbs/reticulated_giraffe_walking_in~AP-0KFFHB-TH.jpg)
 
 Methods
 -------
@@ -25,7 +25,7 @@ You can include *any* markup in this document.
 License
 -------
 
-[pandoc-csv2table-filter](https://github.com/baig/pandoc-fileinclude-filter)
+[pandoc-fileinclude-filter](https://github.com/baig/pandoc-fileinclude-filter)
 
 The MIT License
 
